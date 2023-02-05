@@ -13,7 +13,11 @@ app.get("/api", async (req: Request, res: Response) => {
   let target = req.query.target;
   let request = await fetch(baseURL+base);
   let response = await request.json();
-  res.send(response.rates[target]);
+  res.send({
+    base: base,
+    target: target,
+    rate: response["rates"][`${target}`]
+  });
 })
 
 app.listen(app.get("port"), function(){
